@@ -306,6 +306,9 @@ components:
         coverageEndDate:
           type: string
           format: date
+        dataSource:
+          type: string
+
         recordsAvailable:
           type: boolean
 
