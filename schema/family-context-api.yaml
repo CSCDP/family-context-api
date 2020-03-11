@@ -122,6 +122,30 @@ paths:
         501:
           description: Person search is not supported by this application
 
+  /api/search/person/{cmsId}:
+    get:
+      summary: Search for a person by cms ID
+      description: Returns a single person
+      operationId: getPersonByCmsId
+      tags:
+        - person
+      parameters:
+        - name: cmsId
+          in: path
+          description: Cms ID of person to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        404:
+          description: Person not found
+          content: {}
 
   /api/person/detail/{personId}:
     get:
@@ -271,6 +295,8 @@ components:
       type: object
       properties:
         id:
+          type: string
+        cmsId:
           type: string
         firstName:
           type: string
