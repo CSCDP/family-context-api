@@ -72,6 +72,19 @@ paths:
           description: no authenticated credentials present or credentials not valid for this application
           content: {}
 
+  /api/auth/logout:
+    post:
+      summary: Logout of the service
+      description: >
+        TODO:
+      operationId: postAuthLogout
+      tags:
+        - auth
+      responses:
+        302:
+          description: logout successful, redirect to status
+          content: {}
+
   /api/search/person:
     post:
       summary: Search for a person
