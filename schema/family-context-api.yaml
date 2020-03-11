@@ -23,7 +23,7 @@ paths:
         - auth
       responses:
         200:
-          description: authenticated credentials present - details in message
+          description: authorized credentials present - details in message
           content:
             application/json:
               schema:
@@ -38,8 +38,10 @@ paths:
                     pattern: "[authenticated]"
                 required:
                   - status
+        403:
+          description: authenticated credentials were present, but were not valid for this application
         401:
-          description: no authenticated credentials present or credentials not valid for this application
+          description: no authenticated credentials present
           content: {}
 
   /api/auth/login:
