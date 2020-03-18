@@ -349,7 +349,6 @@ components:
           format: date
         dataSource:
           type: string
-
         recordsAvailable:
           type: boolean
 
