@@ -415,21 +415,23 @@ components:
     Police:
       type: object
       properties:
-        serviceInvolvement:
-          title: Service involvement
+        policeArea:
+          title: Police Area
           type: string
-          pattern: "[yes|no]"
         contact:
           title: Contact
           $ref: '#/components/schemas/Contact'
-        policeStation:
-          title: Police station
-          type: string
-        offences:
-          title: Recent offence
+        safeGuardingOffences:
+          title: Safeguarding Offences (a maximum of 3 will be listed)
           type: array
           items:
             $ref: '#/components/schemas/OffenceSummary'
+        nonSafeGuardingOffences:
+          title: Non-safeguarding Offences
+          type: array
+          items:
+            $ref: '#/components/schemas/OffenceRecordsFound'
+
 
     OffenceSummary:
       type: object
@@ -437,10 +439,20 @@ components:
         dateOfOffence:
           type: string
           format: date
+          title: Date of Offence
         typeOfOffence:
           type: string
+          title: Type of Offence
         natureOfInvolvement:
           type: string
+          title: Nature of Involvement
+
+    OffenceRecordsFound:
+      type: object
+      properties:
+        recordsFound:
+          type: string
+          title: Records Found
 
     School:
       type: object
