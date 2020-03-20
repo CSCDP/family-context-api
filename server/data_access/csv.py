@@ -7,7 +7,7 @@ from datetime import datetime
 from connexion.spec import OpenAPISpecification
 
 from swagger_server.models import ServiceSummary, Person, Police, OffenceSummary, School, AdultSocialCare, Housing, \
-    Contact, ServiceDetail
+    Contact, ServiceDetail, OffenceRecordsFound
 
 SCHEMA_ROOT = "http://www.sfdl.org.uk/schemas/fc/0.0.1#"
 SCHEMA_LOCAL_PREFIX = "#/components/schemas/"
@@ -129,10 +129,12 @@ class CsvSampleDataAccess:
             offence = OffenceSummary(**item)
 
             police = values[(person_id, service_id)]
-            if not police.offences:
-                police.offences = []
-            police.offences.append(offence)
+            if not police.safe_guarding_offences:
+                police.safe_guarding_offences = []
+            police.safe_guarding_offences.append(offence)
 
+            records = OffenceRecordsFound("Yes")
+            police.non_safe_guarding_offences = [records]
         return values
 
     def __read_service_school(self, filename="school.csv"):
