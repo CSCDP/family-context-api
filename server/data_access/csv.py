@@ -39,6 +39,10 @@ class CsvSampleDataAccess:
         # Make sure person exists
         person = self.__persons[person_id]
 
+        today = datetime.today()
+        born = datetime.strptime(person.date_of_birth, '%d/%m/%Y').date()
+        person_age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
         services = []
         # Loop over each service
         for service_id, service in self.__services.items():
@@ -46,7 +50,9 @@ class CsvSampleDataAccess:
             service_data = self.__service_data.get((person_id, service_id))
 
             service.records_available = True if service_data else False
-            services.append(service)
+
+            if self.__should_show_service_for_age(service.id, person_age):
+                services.append(service)
 
         return services
 
@@ -63,6 +69,16 @@ class CsvSampleDataAccess:
         details.data = service_data
 
         return details
+
+    def __should_show_service_for_age(self, service_name, age):
+        if service_name == 'AdultSocialCare':
+            return age >= 15
+        if service_name == 'Housing':
+            return age >= 16
+        if service_name == 'School':
+            return age >= 4 and age <= 20
+        if service_name == 'Police':
+            return age >= 18
 
     def __search_filter(self, person, person_query):
         if (person.first_name == person_query.first_name and person.last_name == person_query.last_name):
