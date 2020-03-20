@@ -3,6 +3,7 @@ import csv
 import json
 import os
 import inflection
+from datetime import datetime
 from connexion.spec import OpenAPISpecification
 
 from swagger_server.models import ServiceSummary, Person, Police, OffenceSummary, School, AdultSocialCare, Housing, \
@@ -28,8 +29,8 @@ class CsvSampleDataAccess:
             values = func()
             self.__service_data.update(values)
 
-    def search_persons(self):
-        return list(self.__persons.values())
+    def search_persons(self, person_query):
+        return list(filter(lambda p: self.__search_filter(p, person_query), self.__persons.values()))
 
     def get_person_by_id(self, person_id):
         return self.__persons[person_id]
@@ -62,6 +63,13 @@ class CsvSampleDataAccess:
         details.data = service_data
 
         return details
+
+    def __search_filter(self, person, person_query):
+        if (person.first_name == person_query.first_name and person.last_name == person_query.last_name):
+            if (person_query.date_of_birth is None \
+            or person_query.date_of_birth == datetime.strptime(person.date_of_birth, '%d/%m/%Y').date()):
+                return True
+        return False
 
     def __read_persons(self, filename="person.csv"):
         data = self.__parse_csv(filename)
