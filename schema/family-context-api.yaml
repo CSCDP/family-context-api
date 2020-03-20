@@ -351,6 +351,8 @@ components:
           type: string
         recordsAvailable:
           type: boolean
+        coverageExplanation:
+          type: string
 
     ServiceDetail:
       type: object
@@ -431,7 +433,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OffenceRecordsFound'
-
 
     OffenceSummary:
       type: object
