@@ -15,7 +15,11 @@ class Person(Model):
 
     Do not edit the class manually.
     """
+<<<<<<< HEAD
+    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None):  # noqa: E501
+=======
     def __init__(self, id: str=None, cms_id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None):  # noqa: E501
+>>>>>>> upstream/master
         """Person - a model defined in Swagger
 
         :param id: The id of this Person.  # noqa: E501
