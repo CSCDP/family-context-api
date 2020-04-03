@@ -1,11 +1,11 @@
 FROM node:12 AS builder
 WORKDIR /app
 
-COPY client/package.json /app/.
-COPY client/yarn.lock /app/.
+COPY ui/package.json /app/.
+COPY ui/yarn.lock /app/.
 RUN yarn install --frozen-lockfile
 
-COPY client /app
+COPY ui /app
 RUN yarn build
 
 
