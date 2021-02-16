@@ -100,8 +100,6 @@ class CsvSampleDataAccess:
         summaries = dict()
         schemas = dict()
 
-
-
         for item in data:
             id = item["id"]
             schema_ref = item.pop("schema_ref")
