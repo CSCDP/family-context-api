@@ -60,10 +60,6 @@ def search_person(body):  # noqa: E501
     return data_access.search_persons(body)
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
 def search_person_supported():  # noqa: E501
     """Is person search supported
 
