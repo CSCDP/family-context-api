@@ -30,7 +30,8 @@ class CsvSampleDataAccess:
             self.__service_data.update(values)
 
     def search_persons(self, person_query):
-        return list(filter(lambda p: self.__search_filter(p, person_query), self.__persons.values()))
+        return list(self.__persons.values())
+        #return list(filter(lambda p: self.__search_filter(p, person_query), self.__persons.values()))
 
     def get_person_by_id(self, person_id):
         return self.__persons[person_id]
@@ -221,7 +222,3 @@ class CsvSampleDataAccess:
 
             item["x-ref"] = SCHEMA_ROOT + schema_key
             return item
-
-
-
-

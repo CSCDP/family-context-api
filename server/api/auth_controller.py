@@ -28,7 +28,7 @@ def check_cookie_auth(api_key, required_scopes):
     try:
         return jwt.decode(api_key, __JWT_SECRET, algorithms=[__JWT_ALGORITHM])
     except Exception as e:
-        Unauthorized.raise_from(e)
+        raise Unauthorized()
 
 
 def post_auth_login(body=None):
@@ -64,6 +64,7 @@ def get_auth_status(user):
     return dict(user=user, status="authenticated")
 
 def post_auth_logout():
+    from flask import make_response, redirect
     response = make_response(redirect('/api/auth/status'))
     response.set_cookie('FCSESSIONID', 'noop')
     return response, 302

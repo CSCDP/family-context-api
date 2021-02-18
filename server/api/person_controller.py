@@ -21,7 +21,7 @@ def get_person_related(person_id):  # noqa: E501
 
     :rtype: List[PersonWithRelationship]
     """
-    return 'do some magic!'
+    return 'Not Implemented', 501
 
 
 def get_person_related_supported(person_id):  # noqa: E501
@@ -57,8 +57,8 @@ def search_person(body):  # noqa: E501
     """
     if connexion.request.is_json:
         body = PersonQuery.from_dict(connexion.request.get_json())  # noqa: E501
-    return data_access.search_persons(body)
-
+        return dict(results=data_access.search_persons(body))
+    return dict(results=[])
 
 def search_person_supported():  # noqa: E501
     """Is person search supported

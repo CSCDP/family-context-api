@@ -6,7 +6,7 @@ COPY ui/yarn.lock /app/.
 RUN yarn install --frozen-lockfile
 
 COPY ui /app
-RUN yarn build
+RUN REACT_APP_API_BASE_URL=/api yarn build
 
 
 
@@ -28,6 +28,8 @@ COPY --from=builder /app/build /usr/src/app/static
 RUN python /usr/src/app/swagger_formatter/__init__.py \
     /usr/src/schema/family-context-api.yaml \
     /usr/src/app/static/family-context-api.xlsx
+
+RUN cd /usr/src/app/static; ln -s . FamilyContext
 
 ENV PORT 8080
 
