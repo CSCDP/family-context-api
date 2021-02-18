@@ -11,6 +11,8 @@ from flask import session, request
 
 import flask
 
+
+
 os.environ["APIKEYINFO_FUNC"] = "api.check_cookie_auth"
 
 
@@ -46,7 +48,16 @@ def send_static():
 
 app = connexion.FlaskApp(__name__, specification_dir='../schema')
 app.app.json_encoder = encoder.JSONEncoder
-CORS(app.app)
+
+api_cors_config = {
+  "origins": [
+      "http://localhost:3000"
+  ],
+  "methods": ["OPTIONS", "GET", "POST"],
+  "allow_headers": ["Authorization", "Content-Type"]
+}
+
+CORS(app.app, supports_credentials=True, resources={r"/*": api_cors_config})
 app.app.secret_key = 'super secret key'
 
 

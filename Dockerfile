@@ -6,7 +6,7 @@ COPY ui/yarn.lock /app/.
 RUN yarn install --frozen-lockfile
 
 COPY ui /app
-RUN REACT_APP_API_BASE_URL=/api/ yarn build
+RUN REACT_APP_API_BASE_URL=/api yarn build
 
 
 
