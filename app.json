@@ -1,0 +1,7 @@
+{
+  "name": "Family Context Reference Application",
+  "description": "A barebones Node.js app using Express",
+  "repository": "https://github.com/CSCDP/family-context-api",
+  "keywords": ["family context", "children's services"],
+  "stack": "container"
+}
