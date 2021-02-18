@@ -1,1 +1,4 @@
 ui/node_modules
+build
+docs
+.git
