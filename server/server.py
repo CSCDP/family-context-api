@@ -8,6 +8,7 @@ from swagger_server import encoder
 from connexion.resolver import RestyResolver
 from flask_cors import CORS
 from flask import session, request
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 import flask
 
@@ -48,6 +49,7 @@ def send_static():
 
 app = connexion.FlaskApp(__name__, specification_dir='../schema')
 app.app.json_encoder = encoder.JSONEncoder
+app.app.wsgi_app = ProxyFix(app.app.wsgi_app, x_proto=1)
 
 api_cors_config = {
   "origins": [
